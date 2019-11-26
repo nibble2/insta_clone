@@ -473,6 +473,7 @@ body {
     overflow: hidden;
     border: 1px solid rgba(0,0,0,0.09);
     border-radius: 3px;
+    display: none;
 }
 
 .hidden_menu .scroll_inner {
@@ -519,21 +520,25 @@ body {
     }
 
     #main_container {
-        padding: 220px;
+        padding-top: 220px;
     }
 
     #main_container .inner {
         width: 93.5%;
     }
 
-    .contents {
-        max-width: 600px;
+    .contents_box {
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
 
     .side_box {
         display: none;
+    }
+
+    .hidden_menu {
+        display: block;
     }
 }
 
