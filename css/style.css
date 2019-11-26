@@ -140,6 +140,10 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+#header.on {
+     position: fixed; /* 상단바 고정  */
+}
+
 #header .inner {
     width: 975px;
     height: 77px;
@@ -147,6 +151,12 @@ body {
     display: flex;
     justify-content: space-between; /* x 축으로 각 요소들의 사이를 알맞게 넓혀주는 작업 */
     align-items: center; /* 넓혀준 요소들을 y축 가운데로 */
+    transition: all 0.5s; /* 화면전환 예쁘*/
+}
+
+
+#header.on .inner {
+    height: 52px;
 }
 
 #header .inner .logo > a {
@@ -165,7 +175,12 @@ body {
     background: #000;
     position: absolute;
     right: -15px;
-    top: -4px
+    top: -4px;
+    transition: all .5s;
+}
+
+#header.on .inner .logo .sprite_insta_icon:after {
+    opacity: 0;
 }
 
 #header .inner .logo div {
@@ -174,6 +189,11 @@ body {
 
 #header .inner .logo div:nth-child(2) {
     transform: translateY(2px);
+    transition: all .5s;
+}
+
+#header.on .inner .logo div:nth-child(2) {/* 스크롤 내렸을 때 로고 사라짐 */
+    opacity: 0;
 }
 
 #header .search_box {
@@ -388,6 +408,11 @@ body {
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.side_box.on {
+    position: fixed; /* fixed의 기준은 브라우저 기준이 되기 때문에 resizeFunc() 함수 참고 */
+    top: 80px;
 }
 
 .side_box .profile_thumb {
