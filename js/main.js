@@ -66,10 +66,47 @@ function delegationFunc(e) {
             }
         })
 
-    } else if(elem.matches('[data-name="more"]')) {
+    } else if(elem.matches('[data-name="comment"]')) {
 
-        console.log('더보기!') ;
+        // 1. 댓글 input에 작성한 내용을 가져온다.
+        var content = document.querySelector('#add-comment-post-37>input[type=text]').value ;
+        console.log(content) ;
+
+        if(content.length > 140 ) {
+            alert('글자 수는 최대 140자까지 입력 가능합니다. 현재 글자 수: ' + content.length ) ;
+            return ;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: './comment.html',
+            data: {
+                'pk': 37,
+                'content': content
+            },
+            dataType: 'html',
+            success: function(data) { // 2. 성고앟면
+                document.querySelector('#comment-list-ajax-post-37').insertAdjacentHTML("afterbegin", data) ;
+            },
+            error:function(request, status, error) {
+                alert('로그인이 필요합니다.');
+                window.location.replace('https://naver.com');
+            }
+        })
+
+        // '게시' 버튼을 클릭하면 input이 다시 초기화 되도록
+        document.querySelector('#add-comment-post-37>input[type=text]').value = '' ;
+
+
+    } else if(elem.matches('[data-name="comment-delete"]')) {
+
+        console.log('댓글 삭제') ;
+
+    } else if(elem.match('[data-name="follow"]')) {
+
+        console.log('파롤우 !') ;
     }
+
 
     elem.classList.toggle('on') ;
 }

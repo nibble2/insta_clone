@@ -352,7 +352,12 @@ body {
 
 .contents .comment_container .comment {
     display: flex;
+    flex-direction: column; /* 댓글을 입력할 때 마다 세로로 */
     font-size: 14px;
+}
+
+.contents .comment_container .comment-detail {
+    display: flex; /* "닉네임 댓글"은 가로로 */
 }
 
 .contents .comment_container .comment .nick_name {
@@ -397,7 +402,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    pointer-events: none;
+    /*pointer-events: none;*/
     opacity: 0.6;
 }
 
