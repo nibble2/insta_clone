@@ -1,12 +1,7 @@
-// const header = document.querySelector('#header') ; /* 헤더 고정 및 아이콘 사라짐*/
 const sidebox = document.querySelector('.side_box') ; /* 사이드박스 고정 및 위치 조정*/
 const variableWidth = document.querySelectorAll('.contents_box .contents') ; /* 컨텐츠 박스 800px*/
 const delegation = document.querySelector('.contents_box') ; /* 좋아요, 공유, 저장 등 버튼*/
 
-// 좋아요 기능
-// heart.addEventListener('click', function() {
-//     heart.classList.toggle('on')
-// }) ;
 
 function delegationFunc(e) {
 
@@ -23,9 +18,27 @@ function delegationFunc(e) {
         }
     }
 
+
+
     if(elem.matches('[data-name="heartbeat"]')) {
 
         console.log('하트@') ;
+
+        $.ajax({
+            type: 'POST',
+            url: 'data/like.json',
+            data: 37,
+            dataType: 'json',
+            success: function(response) {
+
+                let likeCount = document.querySelector('#like-count-37') ;
+                likeCount.innerHTML = '좋아요 ' + response.like_count + '개';
+            },
+            error:function(request, status, error) {
+                alert('로그인이 필요합니다.') ;
+                window.location.replace('https://naver.com') ;
+            }
+        })
 
     } else if (elem.matches('[data-name="share"]')) {
 
@@ -63,7 +76,11 @@ function resizeFunc() {
 
     } else {
         for (let i = 0; i< variableWidth.length; i++) {
-            variableWidth[i].removeAttribute('style') ;
+
+            if(window.innerWidth > 600) {
+                variableWidth[i].removeAttribute('style') ;
+            }
+
         }
     }
 }
