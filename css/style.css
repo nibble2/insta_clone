@@ -78,6 +78,7 @@ body {
     width: 19px;
     height: 24px;
 }
+
 .sprite_bookmark_outline.on {
     background: url('../imgs/background01.png') no-repeat -159px -286px;
     width: 19px;
@@ -240,7 +241,7 @@ body {
     transform: translateX(-105px);
 }
 
-/*검색 글씨 안보이*/
+/* 검색 글씨 안보이게 설정 */
 #search-field:focus ~ .fake_field > span:nth-child(2){
     display: none;
 }
