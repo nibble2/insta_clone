@@ -92,7 +92,7 @@ function delegationFunc(e) {
                 alert('로그인이 필요합니다.');
                 window.location.replace('https://naver.com');
             }
-        })
+        }) ;
 
         // '게시' 버튼을 클릭하면 input이 다시 초기화 되도록
        document.querySelector('#add-comment-post-37>input[type=text]').value = '' ;
@@ -109,7 +109,7 @@ function delegationFunc(e) {
             dataType: 'json',
             success: function (response) {
                 if (response.status) {
-                    let comt = document.querySelector('.comment-detail');
+                    let comt = document.querySelector('.comment_detail');
                     comt.remove();
                 }
             },
@@ -117,9 +117,29 @@ function delegationFunc(e) {
                 alert('로그인이 필요합니다.');
                 window.location.replace('https://naver.com');
             }
-        })
+        }) ;
         console.log('댓글 삭제') ;
 
+    } else if(elem.matches('[data-name="follow"]')) {
+
+        $.ajax ({
+            type: 'POST',
+            url: 'data/follow.json',
+            data: {
+                'pk': 37
+            },
+            dataType: 'json',
+            success: function(response) {
+                if(response.status) {
+                    document.querySelector('input.follow').value = '팔로잉' ;
+                } else {
+                    document.querySelector('input.follow').value = '팔로워' ;
+                }
+            }, error:function(request, status, error) {
+                alert('로그인이 필요합니다.');
+                window.location.replace('https://naver.com');
+            }
+        })
     }
 
 
