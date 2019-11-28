@@ -85,7 +85,7 @@ function delegationFunc(e) {
                 'content': content
             },
             dataType: 'html',
-            success: function(data) { // 2. 성고앟면
+            success: function(data) { // 2. 성공하면
                 document.querySelector('#comment-list-ajax-post-37').insertAdjacentHTML("afterbegin", data) ;
             },
             error:function(request, status, error) {
@@ -95,16 +95,31 @@ function delegationFunc(e) {
         })
 
         // '게시' 버튼을 클릭하면 input이 다시 초기화 되도록
-        document.querySelector('#add-comment-post-37>input[type=text]').value = '' ;
+       document.querySelector('#add-comment-post-37>input[type=text]').value = '' ;
 
 
     } else if(elem.matches('[data-name="comment-delete"]')) {
 
+        $.ajax ({
+            type: 'POST',
+            url: 'data/delete.json',
+            data: {
+                'pk': 37,
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.status) {
+                    let comt = document.querySelector('.comment-detail');
+                    comt.remove();
+                }
+            },
+            error:function(request, status, error) {
+                alert('로그인이 필요합니다.');
+                window.location.replace('https://naver.com');
+            }
+        })
         console.log('댓글 삭제') ;
 
-    } else if(elem.match('[data-name="follow"]')) {
-
-        console.log('파롤우 !') ;
     }
 
 
