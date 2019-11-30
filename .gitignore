@@ -1,4 +1,10 @@
 .idea
-/data/
-/css/reset.css
-/imgs/
+/config/static/data/
+/config/static/css/reset.css
+/config/static/imgs/
+/config/__init__.py
+/config/settings.py
+/config/urls.py
+/config/wsgi.py
+/venv/
+/config/static/css/common.css
