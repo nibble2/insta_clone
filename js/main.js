@@ -6,7 +6,6 @@ const delegation = document.querySelector('.contents_box') ; /* 좋아요, 공�
 function delegationFunc(e) {
 
     let elem = e.target ;
-    console.log(e.target) ;
 
     // data-name이 없으면
     while(!elem.getAttribute('data-name')) {
@@ -135,7 +134,7 @@ function delegationFunc(e) {
                 } else {
                     document.querySelector('input.follow').value = '팔로워' ;
                 }
-            }, error:function(request, status, error) {
+           }, error:function(request, status, error) {
                 alert('로그인이 필요합니다.');
                 window.location.replace('https://naver.com');
             }
@@ -148,12 +147,12 @@ function delegationFunc(e) {
 
 // 사이즈 재조정
 function resizeFunc() {
-    console.log('resize') ;
+    //console.log('resize') ;
     // 스크롤을 내리면 사이드 박스의 좌표값 재조장
     if(pageYOffset >= 10) {
 
         let calcWidth = (window.innerWidth * 0.5 ) + 167 ;
-        console.log(window.innerWidth * 0.5) ;
+        //console.log(window.innerWidth * 0.5) ;
         sidebox.style.left = calcWidth + 'px' ;
 
     }
@@ -177,7 +176,14 @@ function resizeFunc() {
 
 // 스크롤
 function scrollFunc() {
-    console.log(pageYOffset) ;
+
+    let scrollHeight = pageYOffset + window.innerHeight;
+    console.log('scrollHeight: ', scrollHeight) ;
+
+    let documentHeight = document.body.scrollHeight ;
+    console.log('documentHeight:', documentHeight) ;
+
+
     if(pageYOffset >= 10) {
         header.classList.add('on') ;
 
@@ -196,6 +202,44 @@ function scrollFunc() {
             sidebox.removeAttribute('style') ;// 스크롤을 맨 위로 올리면 사이드바가 변경된 스타일로 유지되어 스타일 속성 삭제
         }
     }
+
+    // 페이지, ajax 통신, 남아있는 페이지의 개수
+     if (scrollHeight >= documentHeight) {
+        let page = document.querySelector("#page").value ;
+        document.querySelector("#page").value = parseInt(page) + 1 ;
+
+        callMorePostAjax(page) ;
+
+        if(page > 5) {
+            return ;
+        }
+    }
+}
+
+function callMorePostAjax(page) {
+
+    if(page > 5) {
+        return ;
+    }
+
+    $.ajax ({
+        type: 'POST',
+        url: './post.html',
+        data: {
+            'page' : page,
+        },
+        success: addMorePostAjax,
+        dataType: 'html',
+        // error:function(request, status, error) {
+        //     alert('로그인이 필요합니다.');
+        //     window.location.replace('https://naver.com');
+        // }
+    }) ;
+}
+
+
+function addMorePostAjax(data) {
+    delegation.insertAdjacentHTML('beforeend',  data) ;
 }
 
 // 새로고침
