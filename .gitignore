@@ -1,2 +1,4 @@
-./imgs
 .idea
+/data/
+/css/reset.css
+/imgs/
