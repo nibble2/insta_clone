@@ -58,10 +58,21 @@ config 파일은 db 설정 등 장고 환경을 구성하는 데에 중요한 �
 
 > su - postgres
 
+#### 2-4 앱 생성
+
+> django-admin startapp accounts
+
+> setting.py 파일 수정
+
+#### 2-5 이미지처리 모듈 설치
+
+> pip install pillow
+> pip install pilkit
+> pip install psycopg2-binary
 
 ---
 
-### &#127969; 진행 상황
+### &#127969; 진행상황
 [x] 프런트 화면 ( 2019. 11. 25 ~ 2019. 12. 01)
 
 [ ] 백엔드 환경 구성 ( 2019. 12. 01 ~ )
